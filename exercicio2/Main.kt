@@ -6,5 +6,4 @@ fun main(){
     val objetoTeste = Teste()
 
     objetoTeste.escolhaFormas()
-    objetoTeste.atributosFormas()
 }

@@ -5,14 +5,10 @@ import kotlin.system.exitProcess
 class Teste {
     private var listaFormas : ArrayList <Forma> = ArrayList()
     private lateinit var objetoForma : Forma
-    private lateinit var forma : String
-    private var raio : Float = 0.0F
-    private var lado : Float = 0.0F
-    private var altura : Float = 0.0F
-    private var area : Float = 0.0F
-    private var perimetro : Float = 0.0F
 
-    fun escolhaFormas(){
+    fun escolhaFormas() {
+        var forma = ""
+
         println("-------------------------------------------------")
         println("Qual a forma desejada?")
         println("[C] Circulo")
@@ -30,44 +26,36 @@ class Teste {
                 escolhaFormas()
             }
         }
+
+        atributosFormas(forma)
     }
 
-    fun atributosFormas(){
+    private fun atributosFormas(forma: String) {
         when (forma) {
             "Circulo" -> {
                 println("-------------------------------------------------")
-                raio = pegarAtributo("Qual o raio do circulo?")
+                val raio = pegarAtributo("Qual o raio do circulo?")
                 println("-------------------------------------------------")
                 objetoForma = Circulo(raioParametro = raio)
-                area = objetoForma.calcularArea()
-                perimetro = objetoForma.calcularPerimetro()
-                adicionarFormasLista(objetoForma)
             }
             "Retângulo" -> {
                 println("-------------------------------------------------")
-                lado = pegarAtributo("Qual o lado do retângulo?")
+                val lado = pegarAtributo("Qual o lado do retângulo?")
                 println("-------------------------------------------------")
-                altura = pegarAtributo("Qual a altura do retângulo?")
+                val altura = pegarAtributo("Qual a altura do retângulo?")
                 println("-------------------------------------------------")
                 objetoForma = Retangulo(ladoParametro = lado, alturaParametro = altura)
-                area = objetoForma.calcularArea()
-                perimetro = objetoForma.calcularPerimetro()
-
-                adicionarFormasLista(objetoForma)
             }
             "Quadrado" -> {
                 println("-------------------------------------------------")
-                lado = pegarAtributo("Qual o lado do quadrado?")
-                altura = lado
+                val lado = pegarAtributo("Qual o lado do quadrado?")
                 println("-------------------------------------------------")
                 objetoForma = Quadrado(ladoParametro = lado)
-                area = objetoForma.calcularArea()
-                perimetro = objetoForma.calcularPerimetro()
-                adicionarFormasLista(objetoForma)
             }
         }
 
-        mostrarFormaRecemCadastrada()
+        mostrarFormaRecemCadastrada(forma, objetoForma.calcularArea(), objetoForma.calcularPerimetro())
+        adicionarFormasLista(objetoForma)
         escolhaNovoCadastro()
     }
 
@@ -76,9 +64,10 @@ class Teste {
     }
 
     private fun mostrarFormasLista(){
-        listaFormas.forEach{ _ ->
-            mostrarFormaRecemCadastrada()
+        listaFormas.forEach{ forma ->
+            mostrarFormaRecemCadastrada(forma.mostrarForma(), forma.calcularArea(), forma.calcularPerimetro())
         }
+
     }
 
     private fun pegarAtributo(texto : String): Float {
@@ -86,11 +75,11 @@ class Teste {
         return readln().toFloat()
     }
 
-    private fun mostrarFormaRecemCadastrada(){
+    private fun mostrarFormaRecemCadastrada(forma : String, area : Float, perimetro : Float){
         println("-------------------------------------------------")
         println("Forma: $forma")
         println("Area: $area")
-        println("Perimetro: $perimetro}")
+        println("Perimetro: $perimetro")
         println("-------------------------------------------------")
     }
 
@@ -101,7 +90,7 @@ class Teste {
 
         when (escolha) {
             "S", "s" -> {
-                main()
+                escolhaFormas()
             }
             "N", "n" -> {
                 decisaoSairOuVerLista()

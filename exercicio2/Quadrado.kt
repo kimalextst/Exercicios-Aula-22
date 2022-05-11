@@ -2,10 +2,15 @@ package exercicio2
 
 class Quadrado(
     private var ladoParametro : Float = 0.0F,
-    private var alturaParametro : Float = ladoParametro,
-) : Retangulo() {
+) : Retangulo(ladoParametro = ladoParametro, alturaParametro =  ladoParametro) {
+    private var forma : String = "Quadrado"
+
+    override fun mostrarForma(): String {
+        return forma
+    }
+
     override fun calcularArea(): Float {
-        return ladoParametro * alturaParametro
+        return super.calcularArea()
     }
 
     override fun calcularPerimetro(): Float {
