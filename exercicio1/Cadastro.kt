@@ -60,14 +60,15 @@ class Cadastro {
     }
 
     fun encontrarItemLista(){
+        println("Insira o código de barras que deseja verificar")
+        val codigo = readln()
+
         for (contador in listaItens.indices){
-        listaItens[contador].equals(codigoDeBarras)
+        listaItens[contador].equals(codigo)
         }
     }
 
     override fun equals(other: Any?): Boolean {
-        println("Insira o código de barras que deseja verificar")
-        val codigo = readln()
-        return other == codigo
+        return other == codigoDeBarras
     }
 }

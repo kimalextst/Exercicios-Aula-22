@@ -3,12 +3,14 @@ package exercicio2
 import kotlin.system.exitProcess
 
 class Teste {
-    private var listaFormas : ArrayList <Forma> = ArrayList(5)
+    private var listaFormas : ArrayList <Forma> = ArrayList()
     private lateinit var objetoForma : Forma
     private lateinit var forma : String
     private var raio : Float = 0.0F
     private var lado : Float = 0.0F
     private var altura : Float = 0.0F
+    private var area : Float = 0.0F
+    private var perimetro : Float = 0.0F
 
     fun escolhaFormas(){
         println("-------------------------------------------------")
@@ -23,6 +25,10 @@ class Teste {
             "C", "c" -> forma = "Circulo"
             "R", "r" -> forma = "Retângulo"
             "Q", "q" -> forma = "Quadrado"
+            else -> {
+                println("Ei, escolha inválida. Tente novamente")
+                escolhaFormas()
+            }
         }
     }
 
@@ -33,7 +39,9 @@ class Teste {
                 raio = pegarAtributo("Qual o raio do circulo?")
                 println("-------------------------------------------------")
                 objetoForma = Circulo(raioParametro = raio)
-                adicionarFormasLista()
+                area = objetoForma.calcularArea()
+                perimetro = objetoForma.calcularPerimetro()
+                adicionarFormasLista(objetoForma)
             }
             "Retângulo" -> {
                 println("-------------------------------------------------")
@@ -42,14 +50,20 @@ class Teste {
                 altura = pegarAtributo("Qual a altura do retângulo?")
                 println("-------------------------------------------------")
                 objetoForma = Retangulo(ladoParametro = lado, alturaParametro = altura)
-                adicionarFormasLista()
+                area = objetoForma.calcularArea()
+                perimetro = objetoForma.calcularPerimetro()
+
+                adicionarFormasLista(objetoForma)
             }
             "Quadrado" -> {
                 println("-------------------------------------------------")
                 lado = pegarAtributo("Qual o lado do quadrado?")
+                altura = lado
                 println("-------------------------------------------------")
                 objetoForma = Quadrado(ladoParametro = lado)
-                adicionarFormasLista()
+                area = objetoForma.calcularArea()
+                perimetro = objetoForma.calcularPerimetro()
+                adicionarFormasLista(objetoForma)
             }
         }
 
@@ -57,8 +71,8 @@ class Teste {
         escolhaNovoCadastro()
     }
 
-    private fun adicionarFormasLista(){
-        listaFormas.add(objetoForma)
+    private fun adicionarFormasLista(objeto : Forma){
+        listaFormas.add(objeto)
     }
 
     private fun mostrarFormasLista(){
@@ -75,8 +89,8 @@ class Teste {
     private fun mostrarFormaRecemCadastrada(){
         println("-------------------------------------------------")
         println("Forma: $forma")
-        println("Area: ${objetoForma.calcularArea()}")
-        println("Perimetro: ${objetoForma.calcularPerimetro()}")
+        println("Area: $area")
+        println("Perimetro: $perimetro}")
         println("-------------------------------------------------")
     }
 

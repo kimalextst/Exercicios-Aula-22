@@ -1,10 +1,10 @@
 package exercicio2
 
 class Circulo(
-    private var raioParametro : Float = 0.0F
+    private var raioParametro : Float = 0.0F,
 ) : Forma() {
     override fun calcularArea(): Float {
-        return PI * (raioParametro * 2)
+        return PI * (raioParametro * raioParametro)
     }
 
     override fun calcularPerimetro(): Float {
